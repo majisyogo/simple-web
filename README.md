@@ -1,14 +1,16 @@
-# Simple Web EC2 Terraform
+# Launch-EC2
 
-This repository contains a simple example of creating an EC2 instance on AWS using Terraform.
+##【Project Overview】
+Set up an EC2 instance with Terraform.
 
-- Terraform version: 1.13.5
-- AWS region: Tokyo (ap-northeast-1)
-- Instance type: t3.micro (Free Tier)
+##【Architecture】
+- Terraform provisions a single EC2 instance.
+- AMI is automatically obtained from AWS SSM Parameter Store.
+- Instance type and tags are parameterized for flexibility.
 
-## Usage
-
-1. Clone the repository
-2. Run `terraform init`
-3. Run `terraform plan`
-4. Run `terraform apply`
+##【What I Learned】
+- I cannot launch an EC2 instance without a valid AMI ID.
+- AMI IDs differ by region, so specifying the correct region is important.
+- Using Terraform `data "aws_ssm_parameter"` allows automatic retrieval of the latest AMI, preventing failures from outdated IDs.
+- Variables make instance type and tag name reusable and adaptable across environments.
+- Output blocks help verify the obtained AMI ID and improve transparency during provisioning.
